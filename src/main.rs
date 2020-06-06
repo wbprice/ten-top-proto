@@ -9,10 +9,10 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+mod components;
+mod resources;
 mod state;
 mod systems;
-mod resources;
-mod components;
 
 use crate::systems::{MovementSystem, SpriteSystem};
 
@@ -32,7 +32,7 @@ fn main() -> amethyst::Result<()> {
                     RenderToWindow::from_config_path(display_config)?
                         .with_clear([0.34, 0.36, 0.52, 1.0]),
                 )
-                .with_plugin(RenderFlat2D::default())
+                .with_plugin(RenderFlat2D::default()),
         )?
         .with(MovementSystem, "movement_system", &[])
         .with(SpriteSystem, "sprite_system", &[]);

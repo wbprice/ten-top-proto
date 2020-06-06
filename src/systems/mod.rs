@@ -1,7 +1,4 @@
 mod movement;
 mod sprites;
 
-pub use self::{
-    movement::MovementSystem,
-    sprites::SpriteSystem
-};
+pub use self::{movement::MovementSystem, sprites::SpriteSystem};

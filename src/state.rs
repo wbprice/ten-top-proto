@@ -1,5 +1,5 @@
 use amethyst::{
-    assets::{AssetStorage, Loader, Handle},
+    assets::{AssetStorage, Handle, Loader},
     core::transform::Transform,
     input::{get_key, is_close_requested, is_key_down, VirtualKeyCode},
     prelude::*,
@@ -9,7 +9,7 @@ use amethyst::{
 
 use log::info;
 
-use crate::resources::{SpriteResource};
+use crate::resources::SpriteResource;
 
 pub struct MyState;
 

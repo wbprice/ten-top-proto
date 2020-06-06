@@ -1,12 +1,9 @@
-mod worker;
-mod velocity;
 mod sprite;
+mod velocity;
+mod worker;
 
 pub use self::{
-    worker::Worker,
+    sprite::{Sprite, Sprites},
     velocity::Velocity,
-    sprite::{
-        Sprite,
-        Sprites
-    }
+    worker::Worker,
 };
