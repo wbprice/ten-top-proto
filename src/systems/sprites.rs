@@ -7,9 +7,9 @@ use amethyst::{
 
 use crate::components::{Velocity, Worker};
 
-pub struct MovementSystem;
+pub struct SpriteSystem;
 
-impl<'s> System<'s> for MovementSystem {
+impl<'s> System<'s> for SpriteSystem {
     type SystemData = (
         Entities<'s>,
         ReadStorage<'s, Velocity>,

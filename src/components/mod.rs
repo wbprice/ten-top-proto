@@ -1,5 +1,7 @@
 mod worker;
+mod velocity;
 
 pub use self::{
-    worker::Worker
+    worker::Worker,
+    velocity::Velocity
 };
