@@ -1,26 +1,32 @@
 use amethyst::{
     core::timing::Time,
     core::transform::Transform,
-    ecs::prelude::{Entities, Entity, Join, Read, ReadStorage, System, Write, WriteStorage},
+    ecs::prelude::{Entities, Entity, Join, Read, ReadStorage, ReadExpect, System, Write, WriteStorage},
     renderer::SpriteRender,
 };
 
-use crate::components::{Velocity, Worker};
+use crate::{
+    components::{Sprite},
+    resources::{SpriteResource}
+};
 
 pub struct SpriteSystem;
 
 impl<'s> System<'s> for SpriteSystem {
     type SystemData = (
         Entities<'s>,
-        ReadStorage<'s, Velocity>,
-        WriteStorage<'s, Transform>,
-        Read<'s, Time>,
+        ReadStorage<'s, Sprite>,
+        ReadExpect<'s, SpriteResource>,
+        WriteStorage<'s, SpriteRender>
     );
 
-    fn run(&mut self, (entities, velocities, mut locals, time): Self::SystemData) {
-        for (entity, velocity, local) in (&entities, &velocities, &mut locals).join() {
-            // local.prepend_translation_x(velocity.x * time.delta_seconds());
-            // local.prepend_translation_y(velocity.y * time.delta_seconds());
+    fn run(&mut self, (entities, sprites, sprite_resources, sprite_renders): Self::SystemData) {
+        for (entity, sprite, sprite_resource, _) in (&entities, &sprites, &sprite_resources, !&sprite_renders).join() {
+            // Attach the sprite according to the sprites enum.
+            sprite_renders.insert(entity, SpriteRender {
+                sprite_sheet: sprite_resources.clone(),
+                sprite_number: 1,
+            });
         }
     }
 }

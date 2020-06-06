@@ -6,11 +6,13 @@ use amethyst::{
     renderer::{SpriteRender, SpriteSheet},
 };
 
-use crate::components::{Worker};
+use crate::components::{Worker, Sprite, Sprites};
 
 pub fn init_worker(world: &mut World, local: Transform) {
     world.create_entity()
         .with(Worker {})
         .with(local)
-        .with()
+        .with(Sprite {
+            sprite: Sprites::Worker
+        });
 }

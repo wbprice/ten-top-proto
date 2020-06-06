@@ -1,5 +1,5 @@
 use amethyst::{
-    assets::{AssetStorage, Loader},
+    assets::{AssetStorage, Loader, Handle},
     core::transform::Transform,
     input::{get_key, is_close_requested, is_key_down, VirtualKeyCode},
     prelude::*,
@@ -8,6 +8,8 @@ use amethyst::{
 };
 
 use log::info;
+
+use crate::resources::{SpriteResource};
 
 pub struct MyState;
 
@@ -29,6 +31,10 @@ impl SimpleState for MyState {
         // Load our sprites and display them
         let sprites = load_sprites(world);
         init_sprites(world, &sprites, &dimensions);
+        let sprite_sheet_handle = load_sprite_sheet(world);
+        world.insert(SpriteResource {
+            sprite_sheet: sprite_sheet_handle.clone(),
+        });
     }
 
     fn handle_event(
@@ -68,6 +74,33 @@ fn init_camera(world: &mut World, dimensions: &ScreenDimensions) {
         .with(Camera::standard_2d(dimensions.width(), dimensions.height()))
         .with(transform)
         .build();
+}
+
+fn load_sprite_sheet(world: &mut World) -> Handle<SpriteSheet> {
+    // Load the sprite sheet necessary to render the graphics.
+    // The texture is the pixel data
+    // `sprite_sheet` is the layout of the sprites on the image
+    // `texture_handle` is a cloneable reference to the texture
+
+    let texture_handle = {
+        let loader = world.read_resource::<Loader>();
+        let texture_storage = world.read_resource::<AssetStorage<Texture>>();
+        loader.load(
+            "sprites/spritesheet.png",
+            ImageFormat::default(),
+            (),
+            &texture_storage,
+        )
+    };
+
+    let loader = world.read_resource::<Loader>();
+    let sprite_sheet_store = world.read_resource::<AssetStorage<SpriteSheet>>();
+    loader.load(
+        "sprites/spritesheet.ron",         // Here we load the associated ron file
+        SpriteSheetFormat(texture_handle), // We pass it the texture we want it to use
+        (),
+        &sprite_sheet_store,
+    )
 }
 
 fn load_sprites(world: &mut World) -> Vec<SpriteRender> {
