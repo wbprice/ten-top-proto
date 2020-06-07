@@ -15,7 +15,7 @@ mod resources;
 mod state;
 mod systems;
 
-use crate::systems::{DestinationSystem, MovementSystem, SpriteSystem};
+use crate::systems::{DestinationSystem, MovementSystem, SpriteSystem, TaskSystem};
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -37,7 +37,8 @@ fn main() -> amethyst::Result<()> {
         )?
         .with(MovementSystem, "movement_system", &[])
         .with(SpriteSystem, "sprite_system", &[])
-        .with(DestinationSystem, "destination_system", &[]);
+        .with(DestinationSystem, "destination_system", &[])
+        .with(TaskSystem, "task_system", &[]);
 
     let mut game = Application::new(resources, state::MyState, game_data)?;
     game.run();

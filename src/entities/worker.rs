@@ -4,7 +4,7 @@ use amethyst::{
     prelude::*,
 };
 
-use crate::components::{Destination, Sprite, Sprites, Velocity, Worker};
+use crate::components::{Action, Destination, Sprite, Sprites, Status, Task, Velocity, Worker};
 
 pub fn init_worker(world: &mut World, local: Transform) -> Entity {
     world
@@ -15,6 +15,12 @@ pub fn init_worker(world: &mut World, local: Transform) -> Entity {
             sprite: Sprites::Worker,
         })
         .with(Velocity { x: 0.0, y: 0.0 })
-        .with(Destination { x: 192.0, y: 128.0 })
+        .with(Task {
+            status: Status::InProgress,
+            parent: None,
+            action: Action::MoveTo {
+                destination: Destination { x: 192.0, y: 128.0 },
+            },
+        })
         .build()
 }

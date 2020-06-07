@@ -1,5 +1,6 @@
 use amethyst::ecs::prelude::{Component, DenseVecStorage};
 
+#[derive(Copy, Clone)]
 pub struct Destination {
     pub x: f32,
     pub y: f32,
