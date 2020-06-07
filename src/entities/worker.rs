@@ -16,8 +16,7 @@ pub fn init_worker(world: &mut World, local: Transform) -> Entity {
         })
         .with(Velocity { x: 0.0, y: 0.0 })
         .with(Task {
-            status: Status::InProgress,
-            parent: None,
+            status: Status::New,
             action: Action::MoveTo {
                 destination: Destination { x: 192.0, y: 128.0 },
             },
