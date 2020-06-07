@@ -1,8 +1,7 @@
 use amethyst::{
     core::timing::Time,
     core::transform::Transform,
-    ecs::prelude::{Entities, Entity, Join, Read, ReadStorage, System, Write, WriteStorage},
-    renderer::SpriteRender,
+    ecs::prelude::{Entities, Join, Read, ReadStorage, System, Write, WriteStorage},
 };
 
 use crate::components::{Velocity, Worker};

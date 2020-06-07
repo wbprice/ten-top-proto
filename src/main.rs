@@ -10,10 +10,10 @@ use amethyst::{
 };
 
 mod components;
-mod resources;
 mod entities;
-mod systems;
+mod resources;
 mod state;
+mod systems;
 
 use crate::systems::{MovementSystem, SpriteSystem};
 

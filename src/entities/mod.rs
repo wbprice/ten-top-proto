@@ -1,6 +1,3 @@
 mod worker;
 
-
-pub use self::{
-    worker::init_worker
-};
+pub use self::worker::init_worker;
