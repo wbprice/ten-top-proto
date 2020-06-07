@@ -9,13 +9,7 @@ use amethyst::{
 
 use log::info;
 
-use crate::{
-    resources::SpriteResource,
-    entities::init_worker,
-    components::{
-        Worker
-    }
-};
+use crate::{components::Worker, entities::init_worker, resources::SpriteResource};
 
 pub struct MyState;
 
@@ -46,9 +40,9 @@ impl SimpleState for MyState {
 
         // Instantiate one worker
         let mut worker_local = Transform::default();
-        worker_local.set_translation_xyz(48.0, 48.0, 0.0);
-        init_worker(world, worker_local);
+        let worker_entity = worker_local.set_translation_xyz(48.0, 48.0, 0.0);
 
+        init_worker(world, worker_local);
     }
 
     fn handle_event(

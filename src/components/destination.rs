@@ -1,10 +1,10 @@
 use amethyst::ecs::prelude::{Component, DenseVecStorage};
 
-pub struct Velocity {
+pub struct Destination {
     pub x: f32,
     pub y: f32,
 }
 
-impl Component for Velocity {
+impl Component for Destination {
     type Storage = DenseVecStorage<Self>;
 }

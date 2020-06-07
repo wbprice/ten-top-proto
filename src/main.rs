@@ -10,12 +10,12 @@ use amethyst::{
 };
 
 mod components;
-mod resources;
 mod entities;
-mod systems;
+mod resources;
 mod state;
+mod systems;
 
-use crate::systems::{MovementSystem, SpriteSystem};
+use crate::systems::{DestinationSystem, MovementSystem, SpriteSystem};
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -36,7 +36,8 @@ fn main() -> amethyst::Result<()> {
                 .with_plugin(RenderFlat2D::default()),
         )?
         .with(MovementSystem, "movement_system", &[])
-        .with(SpriteSystem, "sprite_system", &[]);
+        .with(SpriteSystem, "sprite_system", &[])
+        .with(DestinationSystem, "destination_system", &[]);
 
     let mut game = Application::new(resources, state::MyState, game_data)?;
     game.run();
