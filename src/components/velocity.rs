@@ -1,8 +1,8 @@
 use amethyst::ecs::prelude::{Component, DenseVecStorage};
 
 pub struct Velocity {
-    pub x: i8,
-    pub y: i8,
+    pub x: f32,
+    pub y: f32,
 }
 
 impl Component for Velocity {
