@@ -9,7 +9,13 @@ use amethyst::{
 
 use log::info;
 
-use crate::resources::SpriteResource;
+use crate::{
+    resources::SpriteResource,
+    entities::init_worker,
+    components::{
+        Worker
+    }
+};
 
 pub struct MyState;
 
@@ -30,11 +36,19 @@ impl SimpleState for MyState {
 
         // Load our sprites and display them
         let sprites = load_sprites(world);
-        init_sprites(world, &sprites, &dimensions);
         let sprite_sheet_handle = load_sprite_sheet(world);
         world.insert(SpriteResource {
             sprite_sheet: sprite_sheet_handle.clone(),
         });
+
+        // Temporarily register works with the world
+        world.register::<Worker>();
+
+        // Instantiate one worker
+        let mut worker_local = Transform::default();
+        worker_local.set_translation_xyz(48.0, 48.0, 0.0);
+        init_worker(world, worker_local);
+
     }
 
     fn handle_event(
@@ -140,24 +154,4 @@ fn load_sprites(world: &mut World) -> Vec<SpriteRender> {
             sprite_number: i,
         })
         .collect()
-}
-
-fn init_sprites(world: &mut World, sprites: &[SpriteRender], dimensions: &ScreenDimensions) {
-    for (i, sprite) in sprites.iter().enumerate() {
-        // Center our sprites around the center of the window
-        let x = (i as f32 - 1.) * 100. + dimensions.width() * 0.5;
-        let y = (i as f32 - 1.) * 100. + dimensions.height() * 0.5;
-        let mut transform = Transform::default();
-        transform.set_translation_xyz(x, y, 0.);
-
-        // Create an entity for each sprite and attach the `SpriteRender` as
-        // well as the transform. If you want to add behaviour to your sprites,
-        // you'll want to add a custom `Component` that will identify them, and a
-        // `System` that will iterate over them. See https://book.amethyst.rs/stable/concepts/system.html
-        world
-            .create_entity()
-            .with(sprite.clone())
-            .with(transform)
-            .build();
-    }
 }

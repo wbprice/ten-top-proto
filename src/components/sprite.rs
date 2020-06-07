@@ -5,7 +5,7 @@ pub enum Sprites {
 }
 
 pub struct Sprite {
-    sprite: Sprites,
+    pub sprite: Sprites,
 }
 
 impl Component for Sprite {

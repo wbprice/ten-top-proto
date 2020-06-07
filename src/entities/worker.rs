@@ -1,9 +1,7 @@
 use amethyst::{
-    assets::Handle,
     core::transform::Transform,
     ecs::prelude::World,
-    prelude::*,
-    renderer::{SpriteRender, SpriteSheet},
+    prelude::*
 };
 
 use crate::components::{Worker, Sprite, Sprites};
@@ -14,5 +12,6 @@ pub fn init_worker(world: &mut World, local: Transform) {
         .with(local)
         .with(Sprite {
             sprite: Sprites::Worker
-        });
+        })
+        .build();
 }

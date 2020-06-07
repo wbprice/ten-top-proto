@@ -11,8 +11,9 @@ use amethyst::{
 
 mod components;
 mod resources;
-mod state;
+mod entities;
 mod systems;
+mod state;
 
 use crate::systems::{MovementSystem, SpriteSystem};
 
