@@ -18,8 +18,8 @@ impl<'s> System<'s> for MovementSystem {
 
     fn run(&mut self, (entities, velocities, mut locals, time): Self::SystemData) {
         for (entity, velocity, local) in (&entities, &velocities, &mut locals).join() {
-            local.prepend_translation_x(velocity.x * time.delta_seconds());
-            local.prepend_translation_y(velocity.y * time.delta_seconds());
+            local.prepend_translation_x(velocity.x * 48.0 * time.delta_seconds());
+            local.prepend_translation_y(velocity.y * 48.0 * time.delta_seconds());
         }
     }
 }

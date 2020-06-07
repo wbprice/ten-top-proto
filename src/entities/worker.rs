@@ -11,6 +11,6 @@ pub fn init_worker(world: &mut World, local: Transform) {
             sprite: Sprites::Worker,
         })
         .with(Velocity { x: 0.0, y: 0.0 })
-        .with(Destination { x: 192.0, y: 192.0 })
+        .with(Destination { x: 192.0, y: 128.0 })
         .build();
 }
