@@ -1,6 +1,6 @@
 use amethyst::{core::transform::Transform, ecs::prelude::World, prelude::*};
 
-use crate::components::{Sprite, Sprites, Worker};
+use crate::components::{Destination, Sprite, Sprites, Velocity, Worker};
 
 pub fn init_worker(world: &mut World, local: Transform) {
     world
@@ -10,5 +10,7 @@ pub fn init_worker(world: &mut World, local: Transform) {
         .with(Sprite {
             sprite: Sprites::Worker,
         })
+        .with(Velocity { x: 0.0, y: 0.0 })
+        .with(Destination { x: 192.0, y: 192.0 })
         .build();
 }
